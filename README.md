@@ -17,10 +17,11 @@ Here is how i set up my Razer Blade 15 (2021, RTX 3080, 4k) to work with Ubuntu.
     - [TensorCores](#tensorcores)
 - [Carla Autonomous Driving Simulator](#carla-autonomous-driving-simulator)
 - [Nice-to-have](#nice-to-have)
+    - [OpenRazer and polychromatic](#openrazer-and-polychromatic)
     - [Face Unlock](#face-unlock)
     - [Gestures](#gestures)
-    - [OpenRazer](#openrazer)
     - [Guake](#guake)
+    - [Sound](#sound)
 
 ## Preparation
 
@@ -202,6 +203,28 @@ sudo apt install carla-simulator
 
 ## Nice-to-have
 
+### OpenRazer and Polychromatic
+
+[OpenRazer](https://openrazer.github.io/) does currently not offer support for the Blade 2021. 
+
+I updated the driver and created a pull request, until it is merged you can pull from my [fork](https://github.com/EtienneMueller/openrazer/tree/razer_blade_advanced_early_2021).
+
+```markdown
+sudo apt install debhelper dh-python linux-headers-generic python3-setuptools lsb-release dkms
+chmod +rx ./scripts/build_debs.sh
+./scripts/build_debs.sh
+sudo apt install ./dist/*.deb
+```
+
+For the Gui install [Polychromatic](https://github.com/polychromatic/polychromatic/):
+
+```markdown
+sudo add-apt-repository ppa:polychromatic/stable
+sudo apt install polychromatic
+```
+
+Reboot and you're ready to go!
+
 ### Face Unlock
 
 The Blade features an IR camera, to use face recognition instead of typing your password after _sudo_, istall [Howdy](https://github.com/Boltgolt/howdy)
@@ -229,28 +252,6 @@ sudo howdy test
 ### Gestures
 
 If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find is [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable.
-
-### OpenRazer and Polychromatic
-
-[OpenRazer](https://openrazer.github.io/) does currently not offer support for the Blade 2021. 
-
-I updated the driver and created a pull request, until it is merged you can pull from my [fork](https://github.com/EtienneMueller/openrazer/tree/razer_blade_advanced_early_2021).
-
-```markdown
-sudo apt install debhelper dh-python linux-headers-generic python3-setuptools lsb-release dkms
-chmod +rx ./scripts/build_debs.sh
-./scripts/build_debs.sh
-sudo apt install ./dist/*.deb
-```
-
-For the Gui install [Polychromatic](https://github.com/polychromatic/polychromatic/):
-
-```markdown
-sudo add-apt-repository ppa:polychromatic/stable
-sudo apt install polychromatic
-```
-
-Reboot and you're ready to go!
 
 ### Guake
 
