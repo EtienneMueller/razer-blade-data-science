@@ -230,9 +230,27 @@ sudo howdy test
 
 If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find is [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable.
 
-### OpenRazer
+### OpenRazer and Polychromatic
 
-[OpenRazer](https://openrazer.github.io/) does currently not offer support for the Blade 2021. There seem to be a [workaround](https://github.com/openrazer/openrazer/issues/1442), but I haven't tested it so far.
+[OpenRazer](https://openrazer.github.io/) does currently not offer support for the Blade 2021. 
+
+I updated the driver and created a pull request, until it is merged you can pull from my [fork](https://github.com/EtienneMueller/openrazer/tree/razer_blade_advanced_early_2021).
+
+```markdown
+sudo apt install debhelper dh-python linux-headers-generic python3-setuptools lsb-release dkms
+chmod +rx ./scripts/build_debs.sh
+./scripts/build_debs.sh
+sudo apt install ./dist/*.deb
+```
+
+For the Gui install [Polychromatic](https://github.com/polychromatic/polychromatic/):
+
+```markdown
+sudo add-apt-repository ppa:polychromatic/stable
+sudo apt install polychromatic
+```
+
+Reboot and you're ready to go!
 
 ### Guake
 
@@ -243,3 +261,17 @@ sudo apt install guake
 ```
 
 and add "guake" to "Startup Application Preferences".
+
+### Sound
+
+The Blade has probably the worst sounding speaker I have heard since my first mobile phone in the mid 2000s!
+
+Luckily there is [PulseEffects](https://github.com/wwmm/pulseeffects)! Install with
+
+```markdown
+sudo apt install pulseeffects
+```
+
+I spent way too much time tweaking the equalizer and the outcome is actually pretty good:
+
+![PulseEffectsEQ](https://user-images.githubusercontent.com/34913182/119002831-7f2b3f00-b98d-11eb-9c53-ca6d91a5bbb6.png)
