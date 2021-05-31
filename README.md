@@ -276,3 +276,10 @@ sudo apt install pulseeffects
 I spent way too much time tweaking the equalizer and the outcome is actually pretty good:
 
 ![PulseEffectsEQ](https://user-images.githubusercontent.com/34913182/119002831-7f2b3f00-b98d-11eb-9c53-ca6d91a5bbb6.png)
+
+It will flood your menu will a lot of LSP plugins, to hide them I found a solution on [Reddit](https://www.reddit.com/r/linux4noobs/comments/g40e3a/unwanted_lsp_plugins_showing_up/fo2y3bi/?utm_source=share&utm_medium=web2x&context=3)
+
+```markdown
+echo "[Desktop Entry] Hidden=true" > /tmp/1
+find /usr -name "*lsp_plug*desktop" 2>/dev/null | cut -f 5 -d '/' | xargs -I {} cp /tmp/1 ~/.local/share/applications/{}
+```
