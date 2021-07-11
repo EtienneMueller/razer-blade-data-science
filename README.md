@@ -235,11 +235,11 @@ sudo apt update
 sudo apt install howdy
 ```
 
-and change the device path:
+and change the device path (video0 is the normal camera, video2 the IR sensor):
 
 ```markdown
 sudo howdy config
-device_path = /dev/video0
+device_path = /dev/video2
 ```
 
 then add your face:
