@@ -75,6 +75,12 @@ MOZ_USE_XINPUT2=1
 
 The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/udifuchs/icc-brightness) to solve the problem.
 
+And if you want just a black wallpaper, run:
+
+```markdown
+gsettings set org.gnome.desktop.background picture-uri ""
+```
+
 ## Miniconda
 
 Install as usual:
