@@ -71,7 +71,7 @@ sudo nano /etc/environment
 MOZ_USE_XINPUT2=1
 ```
 
-### Brightness
+### OLED Screen
 
 The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/udifuchs/icc-brightness) to solve the problem.
 
@@ -228,6 +228,8 @@ For the Gui install [Polychromatic](https://github.com/polychromatic/polychromat
 sudo add-apt-repository ppa:polychromatic/stable
 sudo apt install polychromatic
 ```
+
+Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark.
 
 Reboot and you're ready to go!
 
