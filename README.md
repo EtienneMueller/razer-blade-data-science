@@ -193,6 +193,15 @@ mixed_precision.set_global_policy('mixed_float16')
 
 I get roughly a 30% speedup. Nice.
 
+## Matlab
+
+Matlab doesn't scale automatically for the  4K-panel. In the command window run:
+
+```markdown
+s = settings;s.matlab.desktop.DisplayScaleFactor
+s.matlab.desktop.DisplayScaleFactor.PersonalValue = 2
+```
+
 ## Carla Autonomous Driving Simulator
 
 [Carla](https://carla.readthedocs.io/en/0.9.11/start_quickstart/) is the only application so far that made minor troubles while installing under Ubuntu 21.04. 
