@@ -24,9 +24,11 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 
 # Installation
 
-## Ubuntu 21.04
+## Which Ubuntu Version?
 
-The Intel WiFi AX210-module is only natively supported from kernel 5.10. To save the trouble from hassling with kernels and drivers, the easiest way is to install Ubuntu 21.04 (which is on kernel 5.11). I used it for a couple of months now and I haven't had any compatibility issues so far.
+The Intel WiFi AX210-module is only natively supported from kernel 5.10. To save the trouble from hassling with kernels and drivers, the easiest way is to install Ubuntu 21.04 (which is on kernel 5.11) or later. I used it for a couple of months and I haven't had any compatibility issues so far. 
+
+I recently switched to 21.10 and in the beginning a couple of applications didn't work for me, as they weren't supported. But by the time of writing everything works well so far. More things work out of the box and installation was way easier than before. I would recommend 21.10.
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
@@ -58,7 +60,7 @@ As the font of grub can be very tiny on a high res display, you can create a big
 sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono24.pf2 --size=42 /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
 ```
 
-Next, open the grub settings with ```sudo nano /etc/default/grub```. For the dual boot setub I would recommend editing/adding:
+Next, open the grub settings with ```sudo nano /etc/default/grub```. For the dual boot setup I adjusted the following settings:
  
 ```markdown
 GRUB_DEFAULT=saved
@@ -74,7 +76,7 @@ Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot``
 
 #### Single Boot
 
-If you are using Ubuntu as a single OS as described before, it will still recognize the system as dual boot due to the recovery partition and always load the grub bootloader on startup. After opening the grub config file with ```sudo nano /etc/default/grub``` I would add/edit it like this:
+If you are using Ubuntu as a single OS as described before, it will still recognize the system as dual boot due to the recovery partition and always load the grub bootloader on startup. After opening the grub config file with ```sudo nano /etc/default/grub``` I used following settings:
 
 ```markdown
 GRUB_DEFAULT=0
@@ -106,6 +108,8 @@ MOZ_USE_XINPUT2=1
 ```
 
 ### Brightness
+
+**21.04 only.** _In 21.10 the brigthness works out of the box, no net for third party software._
 
 The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/tartansandal/icc-brightness) to solve the problem. 
 
@@ -154,9 +158,11 @@ Weirdly, when the tray applet is running and I put the laptop to sleep and wake 
 
 # Data Science
 
+Now for the interesting part.
+
 ## Miniconda
 
-Install as usual:
+Install as usual (if wished):
 
 ```markdown
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -181,7 +187,9 @@ conda env remove -n ENV
 
 ## CUDA and CuDNN
 
-[Edit: there were newer version released recently, I will try them soon and update it here] Activate Nvidia Proprietary Driver in "Software & Updates" (nvidia-driver-470 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.2 for me) with:
+_For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6 so far. Installation procedures were the same for both._
+
+Activate Nvidia Proprietary Driver in "Software & Updates" (nvidia-driver-470 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.2 for me) with:
 
 ```markdown
 nvidia-smi
@@ -239,7 +247,7 @@ To check which GPU is currently being used:
 glxinfo | grep vendor
 ```
 
-In some cases Ubuntu switched back to Wayland for the desktop, which is not supported by Nvidia, so it would always rely on the Intel GPU. To always use Xorg uncomment the line:
+_For Ubuntu 21.04:_ In some cases Ubuntu switched back to Wayland for the desktop, which is not supported by Nvidia, so it would always rely on the Intel GPU. To always use Xorg uncomment the line:
 
 ```markdown
 sudo nano /etc/gdm3/custom.conf
@@ -250,10 +258,10 @@ With Nvidia On-Demand my battery life increased under light load from two hours 
 
 ## Installing TensorFlow
 
-Cuda 11.2 is not supported by TensorFlow 2.5. Use the nightly version of 2.6 [Edit: 2.6 is out as a stable release, will update this page soon]:
+Cuda 11.2 and later need at least TensorFlow 2.6:
 
 ```markdown
-pip install tf-nightly
+pip install tensorflow
 ```
 
 ## Using TensorCores
