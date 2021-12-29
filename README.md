@@ -3,7 +3,7 @@
 Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with Ubuntu.
 
 - [Installation](#installation)
-	- [Ubuntu 21.04](#ubuntu-2104)
+	- [Which Ubuntu Version?](#which-ubuntu-version)
 	- [Dual vs. Single Boot](#dual-vs-single-boot)
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
