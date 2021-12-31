@@ -119,6 +119,10 @@ sudo apt install liblcms2-dev
 sudo make install
 ```
 
+### Bluetooth for Airpods
+
+With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
+
 ### Remove Static Elements
 
 I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
