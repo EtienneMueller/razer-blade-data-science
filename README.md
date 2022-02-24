@@ -194,7 +194,7 @@ conda env remove -n ENV
 
 _For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6 so far. Installation procedures were the same for both._
 
-Activate Nvidia Proprietary Driver in "Software & Updates" (nvidia-driver-470 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.2 for me) with:
+Activate Nvidia Proprietary Driver in "Software & Updates" (nvidia-driver-470 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.4 for me) with:
 
 ```markdown
 nvidia-smi
