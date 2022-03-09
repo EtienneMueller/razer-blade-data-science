@@ -64,11 +64,11 @@ sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono24.pf2 --size=42 /usr/s
 Next, open the grub settings with ```sudo nano /etc/default/grub```. For the dual boot setup I adjusted the following settings:
  
 ```markdown
-GRUB_DEFAULT=saved
-GRUB_SAVEDEFAULT=true
-GRUB_TIMEOUT=1
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"
-GRUB_FONT=/boot/grub/fonts/DejaVuSansMono24.pf2
+GRUB_DEFAULT=saved  # boot the saved OS
+GRUB_SAVEDEFAULT=true  # save the last booted OS
+GRUB_TIMEOUT=1  # time it is shown (in seconds)
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend boot loop fix (see above)
+GRUB_FONT=/boot/grub/fonts/DejaVuSansMono24.pf2  # choosing the created bigger font for 4k display
 ```
 
 The first two lines will boot the last used OS, the third lines set the time in seconds the menu is shown (adjust to your own preferences), fourth line is the suspend loop fix and lastly, the previously created font.
@@ -77,13 +77,13 @@ Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot``
 
 #### Single Boot
 
-If you are using Ubuntu as a single OS as described before, it will still recognize the system as dual boot due to the recovery partition and always load the grub bootloader on startup. After opening the grub config file with ```sudo nano /etc/default/grub``` I used following settings:
+If you are using Ubuntu as a single OS as described before, it will still recognize the system as dual boot due to the recovery partition and always load the grub bootloader on startup (but can be hidden with the following settings). After opening the grub config file with ```sudo nano /etc/default/grub``` I used following settings:
 
 ```markdown
-GRUB_DEFAULT=0
-GRUB_TIMEOUT=1
-GRUB_DISABLE_OS_PROBER=true
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"
+GRUB_DEFAULT=0  # boot first entry in the list (Ubuntu)
+GRUB_TIMEOUT=1  # time until grub automatically loads the chosen OS (in seconds)
+GRUB_DISABLE_OS_PROBER=true  # do not show grub (since it is single boot anyways)
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend boot loop fix (see above)
 ```
 
 First line choses Ubuntu as boot partition. As grub will still run in background, the timeout is set to one second (setting it to zero it will be ignored and then it takes the standard time of ten seconds). The third line hides the display output, and the last line fixes the suspend loop.
