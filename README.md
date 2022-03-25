@@ -222,7 +222,15 @@ Another reboot and everything works.
 
 ## Nvidia On-Demand
 
-The RTX 3080 supports _Nvidia On-Demand_, so your notebook will mainly use the Intel GPU and use the dedicated one only if needed. Go to _NVIDIA X Server Settings_ and set the _PRIME Profiles_ to _NVIDIA On-Demand_. You can specifiy which applications should use the Nvidia GPU under:
+The RTX 3080 supports _Nvidia On-Demand_, so your notebook will mainly use the Intel GPU and use the dedicated one only if needed. Go to _NVIDIA X Server Settings_ and set the _PRIME Profiles_ to _NVIDIA On-Demand_. You can also do this via Terminal with ```prime-select```, for example
+
+```markdown
+sudo prime-select on-demand
+```
+
+(also helpful if Intel only is greyed out)
+
+You can specifiy which applications should use the Nvidia GPU under:
 
 ```markdown
 sudo nano /etc/environment
