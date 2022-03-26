@@ -8,9 +8,10 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
 	- [Grub Settings](#grub-settings)
-	- [OLED and Touch](#oled-and-touch)
+	- [4K OLED](#4k-oled)
 	- [Buetooth for AirPods](#bluetooth-for-airpods)
 	- [Keyboard Backlight](#keyboard-backlight)
+	- [Older Ubuntu Versions](#older-ubuntu-versions)
 - [Data Science](#data-science)
 	- [Miniconda](#miniconda)
     - [CUDA and CuDNN](#cuda-and-cudnn)
@@ -90,41 +91,7 @@ First line choses Ubuntu as boot partition. As grub will still run in background
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
 
-## OLED and Touch
-
-The 4K OLED touchscreen looks nice, but has a couple of problems right out of the box.
-
-### Firefox with Touch
-
-Firefox isn't scrolling with touch. Open the environment file with:
-
-```markdown
-sudo nano /etc/environment
-```
-
-and add
-
-```markdown
-MOZ_USE_XINPUT2=1
-```
-
-### Brightness
-
-**21.04 only.** _In 21.10 the brigthness works out of the box, no net for third party software._
-
-The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/tartansandal/icc-brightness) to solve the problem. 
-
-```markdown
-sudo apt install build-essential
-sudo apt install liblcms2-dev
-sudo make install
-```
-
-### Bluetooth for Airpods
-
-With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
-
-### Remove Static Elements
+## 4K OLED
 
 I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
 
@@ -137,6 +104,10 @@ I haven't heard so far, whether the OLED screen suffers of burn-in or not. But i
 - **Hide the Top Bar.** Lastly, to hide the top bar you can install the gnome extension [Hide Top Bar](https://extensions.gnome.org/extension/545/hide-top-bar/). Activate it and set the two Intellihide options off.
 
 - **Hide Home and Trash Icon.** When gnome extension is installed, you can also remove the icons from the desktop. Just right-click in the desktop, choose settings and turn off the toggles for personal folder and trash.
+
+## Bluetooth for Airpods
+
+With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
 
 ## Keyboard Backlight
 
@@ -160,6 +131,39 @@ sudo apt install polychromatic
 Reboot and you're ready to go!
 
 Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark. I just turned the applet of in startup scripts and that solved the problem.
+
+## Older Ubuntu Versions
+
+Here are the things I had problems with in Ubuntu 21.04, but worked fine with later versions.
+
+### Firefox with Touch
+
+Firefox isn't scrolling with touch. Open the environment file with:
+
+```markdown
+sudo nano /etc/environment
+```
+
+and add
+
+```markdown
+MOZ_USE_XINPUT2=1
+```
+
+### Brightness
+
+The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/tartansandal/icc-brightness) to solve the problem. 
+
+```markdown
+sudo apt install build-essential
+sudo apt install liblcms2-dev
+sudo make install
+```
+
+### Gestures
+
+If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find was [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable. For the GUI I used [Touché](https://github.com/JoseExposito/touche). You might also want to check https://ubuntuhandbook.org/index.php/2021/06/multi-touch-gestures-ubuntu-20-04/
+
 
 # Data Science
 
@@ -351,21 +355,3 @@ sudo howdy test
 ```
 
 There seems to be a [problem](https://github.com/boltgolt/howdy/issues/323) at some times, when the IR light doesn't turn on. Apparently, by booting from the bios the problem does not occur anymore.
-
-## Gestures
-
-If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find is [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable. Install it with
-
-```markdown
-sudo add-apt-repository ppa:touchegg/stable
-sudo apt update
-sudo apt install touchegg
-```
-
-For the GUI I use [Touché](https://github.com/JoseExposito/touche), which can be installed from Flatpak with
-
-```markdown
-flatpak install flathub com.github.joseexposito.touche
-```
-
-Check: https://ubuntuhandbook.org/index.php/2021/06/multi-touch-gestures-ubuntu-20-04/
