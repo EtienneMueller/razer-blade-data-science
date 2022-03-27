@@ -13,16 +13,15 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 	- [Keyboard Backlight](#keyboard-backlight)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
 - [Data Science](#data-science)
-	- [Miniconda](#miniconda)
-    - [CUDA and CuDNN](#cuda-and-cudnn)
-    - [Nvidia On-Demand](#nvidia-on-demand)
-	- [Installing TensorFlow](#installing-tensorflow)
-    - [Using TensorCores](#using-tensorcores)
+    	- [CUDA and CuDNN](#cuda-and-cudnn)
+    	- [Nvidia On-Demand](#nvidia-on-demand)
+	- [Conda and TensorFlow](#conda-and-tensorflow)
+	- [Using TensorCores](#using-tensorcores)
 	- [Carla Autonomous Driving Simulator](#carla-autonomous-driving-simulator)
 - [Nice to Have](#nice-to-have)
 	- [Sound](#sound)
 	- [Face Unlock](#face-unlock)
-    - [Gestures](#gestures)
+	- [Gestures](#gestures)
 
 # Installation
 
@@ -169,31 +168,6 @@ If you're coming from a mac, you'll probably miss the gestures on the touchpad. 
 
 Now for the interesting part.
 
-## Miniconda
-
-Install as usual (if wished):
-
-```markdown
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-source ~/.bashrc
-```
-
-Create and activate environment:
-
-```markdown
-conda create --name ENV python==3.7
-conda activate ENV
-pip install --upgrade pip
-```
-
-If you need to deactivate and remove environments you can do it with:
-
-```markdown
-conda deactivate
-conda env remove -n ENV
-```
-
 ## CUDA and CuDNN
 
 _For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6 so far. Installation procedures were the same for both._
@@ -273,7 +247,30 @@ WaylandEnable=false
 
 With Nvidia On-Demand my battery life increased under light load from two hours to nearly seven hours.
 
-## Installing TensorFlow
+## Conda and TensorFlow
+
+I like to use Miniconda for my work. Install as usual (if wished):
+
+```markdown
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+source ~/.bashrc
+```
+
+Create and activate environment:
+
+```markdown
+conda create --name ENV python==3.7
+conda activate ENV
+pip install --upgrade pip
+```
+
+If you need to deactivate and remove environments you can do it with:
+
+```markdown
+conda deactivate
+conda env remove -n ENV
+```
 
 Cuda 11.2 and later need at least TensorFlow 2.6:
 
