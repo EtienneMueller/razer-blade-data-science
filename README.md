@@ -172,7 +172,7 @@ Now for the interesting part.
 
 _For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6 so far. Installation procedures were the same for both._
 
-Activate Nvidia Proprietary Driver in "Software & Updates" (nvidia-driver-470 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.4 for me) with:
+Activate Nvidia Proprietary Driver in "Software & Updates" under "Additional Drivers" (nvidia-driver-510 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.4 for me) with:
 
 ```markdown
 nvidia-smi
@@ -187,9 +187,10 @@ sudo apt install nvidia-cuda-toolkit
 Download [Nvidia CuDNN](https://developer.nvidia.com/cudnn), extract the tarball and copy the files to the corresponding path:
 
 ```markdown
-tar -xzvf cudnn-11.4-linux-x64-v8.2.4.15.tgz
-sudo cp cuda/include/cudnn*.h /usr/lib/cuda/include/
-sudo cp -P cuda/lib64/libcudnn* /usr/lib/cuda/lib64/
+tar -xf cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive.tar.xz
+
+sudo cp cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive/include/cudnn*.h /usr/lib/cuda/include/
+sudo cp -P cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive/lib/libcudnn* /usr/lib/cuda/lib64/
 sudo chmod a+r /usr/lib/cuda/include/cudnn*.h /usr/lib/cuda/lib64/libcudnn*
 echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH' >> ~/.bashrc
