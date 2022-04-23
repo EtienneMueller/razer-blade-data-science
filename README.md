@@ -8,7 +8,7 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
 	- [Grub Settings](#grub-settings)
-	- [4K OLED](#4k-oled)
+	
 	- [Buetooth for AirPods](#bluetooth-for-airpods)
 	- [Keyboard Backlight](#keyboard-backlight)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
@@ -19,17 +19,19 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 	- [Using TensorCores](#using-tensorcores)
 	- [Carla Autonomous Driving Simulator](#carla-autonomous-driving-simulator)
 - [Nice to Have](#nice-to-have)
-	- [Sound](#sound)
+	- [Better Sound](#better-sound)
 	- [Face Unlock](#face-unlock)
-	- [Gestures](#gestures)
+	- [4K OLED](#4k-oled)
 
 # Installation
 
 ## Which Ubuntu Version?
 
-The Intel WiFi AX210-module is only natively supported from kernel 5.10. To save the trouble from hassling with kernels and drivers, the easiest way is to install Ubuntu 21.04 (which is on kernel 5.11) or later. I used it for a couple of months and I haven't had any compatibility issues so far. 
+The Intel WiFi AX210-module is only natively supported from kernel 5.10. Since the last LTS version 22.04 was on an older kernel and I wanted to save the trouble from hassling with it, the easiest way was to install Ubuntu 21.04 (which was on kernel 5.11). As pointed out in the issues, version 20.04 ships now with a newer kernel and should work fine.
 
-I recently switched to 21.10 and in the beginning a couple of applications didn't work for me, as they weren't supported. But by the time of writing everything works well so far. More things work out of the box and installation was way easier than before. I would recommend 21.10.
+Later, I switched to 21.10 and in the beginning a couple of applications didn't work for me, as they weren't supported. But everything got resolved very quickly. More things work out of the box and installation was way easier than before.
+
+I downloaded the new LTS version 22.04 directly on day 1 and will update this guide when something comes up. So far everything works perfectly.
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
@@ -89,24 +91,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend 
 First line choses Ubuntu as boot partition. As grub will still run in background, the timeout is set to one second (setting it to zero it will be ignored and then it takes the standard time of ten seconds). The third line hides the display output, and the last line fixes the suspend loop.
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
-
-## 4K OLED
-
-I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
-
-- **Black Wallpaper.** ou can remove the wallpaper and have a blank background. Weirdly it isn't always just black, it depends which wallpaper was chosen before. Run ```gsettings set org.gnome.desktop.background picture-uri "" ```
-
-- **Hide Mouse Cursor.** To hide the mouse cursor when idling, install Unclutter with ```sudo apt-get install unclutter```. Then, add the command ```unclutter``` to the startup applications.
-
-- **Hide the Dock.** One option is to go into the settings and set the dock to "auto-hide", then it will only appear when dragging the mouse to the side of the screen. To completely remove it you can install _Gnome Extensions_ from Ubuntu Software and turn the dock off. Then, it will only be visible in the activities overview when pressing the super key (the windows key in the case of the Blade).
-
-- **Hide the Top Bar.** Lastly, to hide the top bar you can install the gnome extension [Hide Top Bar](https://extensions.gnome.org/extension/545/hide-top-bar/). Activate it and set the two Intellihide options off.
-
-- **Hide Home and Trash Icon.** When gnome extension is installed, you can also remove the icons from the desktop. Just right-click in the desktop, choose settings and turn off the toggles for personal folder and trash.
-
-## Bluetooth for Airpods
-
-With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
 
 ## Keyboard Backlight
 
@@ -315,7 +299,7 @@ sudo apt install carla-simulator
 
 # Nice to Have
 
-## Sound
+## Better Sound
 
 The Blade has probably the worst sounding speaker I have heard since my first mobile phone in the mid 2000s! Luckily, there is [PulseEffects](https://github.com/wwmm/pulseeffects)! Install with
 
@@ -353,3 +337,22 @@ sudo howdy test
 ```
 
 There seems to be a [problem](https://github.com/boltgolt/howdy/issues/323) at some times, when the IR light doesn't turn on. Apparently, by booting from the bios the problem does not occur anymore.
+
+
+## 4K OLED
+
+I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
+
+- **Black Wallpaper.** ou can remove the wallpaper and have a blank background. Weirdly it isn't always just black, it depends which wallpaper was chosen before. Run ```gsettings set org.gnome.desktop.background picture-uri "" ```
+
+- **Hide Mouse Cursor.** To hide the mouse cursor when idling, install Unclutter with ```sudo apt-get install unclutter```. Then, add the command ```unclutter``` to the startup applications.
+
+- **Hide the Dock.** One option is to go into the settings and set the dock to "auto-hide", then it will only appear when dragging the mouse to the side of the screen. To completely remove it you can install _Gnome Extensions_ from Ubuntu Software and turn the dock off. Then, it will only be visible in the activities overview when pressing the super key (the windows key in the case of the Blade).
+
+- **Hide the Top Bar.** Lastly, to hide the top bar you can install the gnome extension [Hide Top Bar](https://extensions.gnome.org/extension/545/hide-top-bar/). Activate it and set the two Intellihide options off.
+
+- **Hide Home and Trash Icon.** When gnome extension is installed, you can also remove the icons from the desktop. Just right-click in the desktop, choose settings and turn off the toggles for personal folder and trash.
+
+## Bluetooth for Airpods
+
+With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
