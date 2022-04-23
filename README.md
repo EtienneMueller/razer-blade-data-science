@@ -8,7 +8,6 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
 	- [Grub Settings](#grub-settings)
-	
 	- [Buetooth for AirPods](#bluetooth-for-airpods)
 	- [Keyboard Backlight](#keyboard-backlight)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
