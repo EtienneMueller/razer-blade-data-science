@@ -153,7 +153,7 @@ Now for the interesting part.
 
 ## CUDA and CuDNN
 
-_For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6 so far. Installation procedures were the same for both._
+_For 21.04 I used the nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta, under 21.10 I only tested nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6. For 22.04 I used nvidia-driver-510 with CUDA 11.6. Installation procedures were the same for all versions._
 
 Activate Nvidia Proprietary Driver in "Software & Updates" under "Additional Drivers" (nvidia-driver-510 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.4 for me) with:
 
