@@ -326,7 +326,7 @@ sudo apt install wireplumber pipewire-media-session-
 
 Reboot and run start the application. 
 
-I spent way too much time tweaking the equalizer and the outcome is actually pretty good:
+I spent way too much time tweaking the equalizer and the outcome is actually pretty good (screenshot still from PulseEffects, EasyEffects looks similar):
 
 ![PulseEffectsEQ](https://user-images.githubusercontent.com/34913182/119002831-7f2b3f00-b98d-11eb-9c53-ca6d91a5bbb6.png)
 
