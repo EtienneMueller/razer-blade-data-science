@@ -303,7 +303,7 @@ sudo apt install carla-simulator
 
 ## Better Sound
 
-The Blade has probably the worst sounding speaker I have heard since my first mobile phone in the mid 2000s! Luckily, there is [PulseEffects](https://github.com/wwmm/pulseeffects)! Install with
+The Blade has probably the worst sounding speaker I have heard since my first mobile phone in the mid 2000s! Luckily, there is [PulseEffects](https://github.com/wwmm/pulseeffects)! Install from Snap Store or with
 
 ```markdown
 sudo apt install pulseeffects
@@ -320,6 +320,35 @@ echo "[Desktop Entry] Hidden=true" > /tmp/1
 find /usr -name "*lsp_plug*desktop" 2>/dev/null | cut -f 5 -d '/' | xargs -I {} cp /tmp/1 ~/.local/share/applications/{}
 ```
 
+### Update: EasyEffects
+
+PulseEffects got updated and is called [EasyEffects](https://github.com/wwmm/easyeffects) now. At the moment it is still a little bit more complicated. If you haven't install Flatpak do so with 
+
+```markdown
+sudo apt install flatpak
+```
+
+and then install EasyEffects
+
+```markdown
+flatpak install flathub com.github.wwmm.easyeffects
+```
+
+You need the run following commands as described [here](https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/):
+
+```markdown
+sudo apt install pipewire-audio-client-libraries libspa-0.2-bluetooth libspa-0.2-jack
+sudo apt install wireplumber pipewire-media-session-
+```
+
+Reboot and run start the application. Importing the uploaded .json file here does not work at the moment, I will look into it.
+For starting at boot you can add
+
+```markdown
+flatpak run com.github.wwmm.easyeffects
+```
+
+to the Startup Applications (start service at login from the settings does not work at the moment. Maybe it has to be compiled from the source)
 
 ## Face Unlock
 
