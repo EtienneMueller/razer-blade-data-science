@@ -375,7 +375,7 @@ I haven't heard so far, whether the OLED screen suffers of burn-in or not. But i
 
 - **Black Wallpaper.** ou can remove the wallpaper and have a blank background. Weirdly it isn't always just black, it depends which wallpaper was chosen before. Run ```gsettings set org.gnome.desktop.background picture-uri "" ```
 
-- **Hide Mouse Cursor.** To hide the mouse cursor when idling, install Unclutter with ```sudo apt install unclutter```. Then, add the command ```unclutter``` to the startup applications.
+- **Hide Mouse Cursor.** To hide the mouse cursor when idling, install [Unclutter](https://manpages.ubuntu.com/manpages/trusty/man1/unclutter.1.html) with ```sudo apt install unclutter```. Then, add the command ```unclutter``` to the startup applications.
 
 - **Hide the Dock.** One option is to go into the settings and set the dock to "auto-hide", then it will only appear when dragging the mouse to the side of the screen. To completely remove it you can install _Gnome Extensions_ from Ubuntu Software and turn the dock off. Then, it will only be visible in the activities overview when pressing the super key (the windows key in the case of the Blade).
 
