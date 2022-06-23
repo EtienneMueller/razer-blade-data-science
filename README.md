@@ -373,7 +373,7 @@ There seems to be a [problem](https://github.com/boltgolt/howdy/issues/323) at s
 
 I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
 
-- **Black Wallpaper.** ou can remove the wallpaper and have a blank background. Use deconf Editor or Terminal and set the background color to black with ```gsettings set org.gnome.desktop.background primary-color "#000000" ```, remove the wallpaper with ```gsettings set org.gnome.desktop.background picture-uri "" ``` for light mode and ```gsettings set org.gnome.desktop.background picture-uri-dark "" ``` for dark mode.
+- **Black Wallpaper.** ou can remove the wallpaper and have a blank background. Use _dconf Editor_ or Terminal and set the background color to black with ```gsettings set org.gnome.desktop.background primary-color "#000000" ```, remove the wallpaper with ```gsettings set org.gnome.desktop.background picture-uri "" ``` for light mode and ```gsettings set org.gnome.desktop.background picture-uri-dark "" ``` for dark mode.
 
 - **Hide Mouse Cursor.** To hide the mouse cursor when idling, install [Unclutter](https://manpages.ubuntu.com/manpages/trusty/man1/unclutter.1.html) with ```sudo apt install unclutter```. Then, add the command ```unclutter``` to the startup applications.
 
