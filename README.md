@@ -247,7 +247,7 @@ source ~/.bashrc
 Create and activate environment:
 
 ```markdown
-conda create --name ENV python==3.7
+conda create --name ENV python
 conda activate ENV
 pip install --upgrade pip
 ```
