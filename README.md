@@ -187,7 +187,8 @@ echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH' >> ~/.bashr
 source ~/.bashrc
 ```
 
-Another reboot and everything works.
+Another reboot and everything should work. In one case, after reboot the Nvidia drivers were greyed out in _Software & Updates_ and TensorFlow was using the CPU. Running ```sudo ubuntu-drivers install``` and rebooting solved the problem.
+
 
 ## Nvidia On-Demand
 
