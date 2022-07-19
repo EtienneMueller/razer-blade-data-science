@@ -162,7 +162,7 @@ _To work at least TensorFlow 2.6 is needed. The configurations I tested and work
 
 _Basically staying for the driver, CUDA and TensorFlow on the latest version worked fine for me. Installation procedures were the same for all versions._
 
-Activate Nvidia Proprietary Driver in "Software & Updates" under "Additional Drivers" (nvidia-driver-510 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.4 for me) with:
+Activate Nvidia Proprietary Driver in "Software & Updates" under "Additional Drivers" (nvidia-driver-515 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.6 for me) with:
 
 ```markdown
 nvidia-smi
