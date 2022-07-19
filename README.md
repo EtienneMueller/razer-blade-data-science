@@ -54,8 +54,6 @@ After the lid was closed, the notebook goes back to suspend after a couple of se
 
 Depending on whether you are using a dual or single boot setup, you might want to increase the font size of the grub menu (especially for the 4K display) or to hide it completely.
 
-#### Dual Boot
-
 As the font of grub can be very tiny on a high res display, you can create a bigger one with the following command, as described [here](https://blog.wxm.be/2014/08/29/increase-font-in-grub-for-high-dpi.html). I chose a font size of 42 for the 4K panel. 
 
 ```markdown
@@ -63,11 +61,13 @@ sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono24.pf2 --size=42 /usr/s
 ```
 
 Next, open the grub settings with ```sudo nano /etc/default/grub```. For the dual boot setup I adjusted the following settings:
+
+#### For Dual Boot
  
 ```markdown
 GRUB_DEFAULT=saved  # boot the saved OS
 GRUB_SAVEDEFAULT=true  # save the last booted OS
-GRUB_TIMEOUT=1  # time it is shown (in seconds)
+GRUB_TIMEOUT=2  # time it is shown (in seconds)
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend boot loop fix (see above)
 GRUB_FONT=/boot/grub/fonts/DejaVuSansMono24.pf2  # choosing the created bigger font for 4k display
 ```
@@ -76,7 +76,7 @@ The first two lines will boot the last used OS, the third lines set the time in 
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
 
-#### Single Boot
+#### For Single Boot
 
 If you are using Ubuntu as a single OS as described before, it will still recognize the system as dual boot due to the recovery partition and always load the grub bootloader on startup (but can be hidden with the following settings). After opening the grub config file with ```sudo nano /etc/default/grub``` I used following settings:
 
