@@ -52,6 +52,8 @@ After the lid was closed, the notebook goes back to suspend after a couple of se
 
 ## Grub Settings
 
+#### Grub Font Size
+
 Depending on whether you are using a dual or single boot setup, you might want to increase the font size of the grub menu (especially for the 4K display) or to hide it completely.
 
 As the font of grub can be very tiny on a high res display, you can create a bigger one with the following command, as described [here](https://blog.wxm.be/2014/08/29/increase-font-in-grub-for-high-dpi.html). I chose a font size of 42 for the 4K panel. 
