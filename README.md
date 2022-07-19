@@ -70,7 +70,6 @@ GRUB_SAVEDEFAULT=true  # save the last booted OS
 GRUB_TIMEOUT=2  # time it is shown (in seconds)
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend boot loop fix (see above)
 GRUB_FONT=/boot/grub/fonts/DejaVuSansMono24.pf2  # choosing the created bigger font for 4k display
-#GRUB_DISABLE_OS_PROBER=true  # comment this line in case it isn't
 ```
 
 The first two lines will boot the last used OS, the third lines set the time in seconds the menu is shown (adjust to your own preferences), fourth line is the suspend loop fix and lastly, the previously created font.
