@@ -60,7 +60,7 @@ As the font of grub can be very tiny on a high res display, you can create a big
 sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono24.pf2 --size=42 /usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf
 ```
 
-Next, open the grub settings with ```sudo nano /etc/default/grub```. For the dual boot setup I adjusted the following settings:
+Next, open the grub settings with ```sudo nano /etc/default/grub``` and adjust it for either dual boot or single boot.
 
 #### For Dual Boot
  
@@ -70,6 +70,7 @@ GRUB_SAVEDEFAULT=true  # save the last booted OS
 GRUB_TIMEOUT=2  # time it is shown (in seconds)
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend boot loop fix (see above)
 GRUB_FONT=/boot/grub/fonts/DejaVuSansMono24.pf2  # choosing the created bigger font for 4k display
+#GRUB_DISABLE_OS_PROBER=true  # comment this line in case it isn't
 ```
 
 The first two lines will boot the last used OS, the third lines set the time in seconds the menu is shown (adjust to your own preferences), fourth line is the suspend loop fix and lastly, the previously created font.
