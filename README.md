@@ -155,7 +155,7 @@ Now for the interesting part.
 
 ## CUDA and CuDNN
 
-_To work at least TensorFlow 2.6 is needed. The configurations I tested and worked:
+_To work at least TensorFlow 2.6 is needed. The configurations I tested and worked:_
 - _Ubuntu 21.04: nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta._
 - _Ubuntu 21.10: nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6._
 - _Ubuntu 22.04: nvidia-driver-510 and 515 with CUDA 11.6 and TensorFlow 2.8 and 2.9._
