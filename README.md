@@ -179,8 +179,8 @@ Download [Nvidia CuDNN](https://developer.nvidia.com/cudnn), extract the tarball
 ```markdown
 tar -xf cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive.tar.xz  # edit to the downloaded version
 
-sudo cp cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive/include/cudnn*.h /usr/lib/cuda/include/
-sudo cp -P cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive/lib/libcudnn* /usr/lib/cuda/lib64/
+sudo cp cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive/include/cudnn*.h /usr/lib/cuda/include/
+sudo cp -P cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive/lib/libcudnn* /usr/lib/cuda/lib64/
 sudo chmod a+r /usr/lib/cuda/include/cudnn*.h /usr/lib/cuda/lib64/libcudnn*
 echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH' >> ~/.bashrc
