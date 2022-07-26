@@ -3,7 +3,7 @@
 Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with Ubuntu.
 
 - [Installation](#installation)
-	- [Which Ubuntu Version?](#which-ubuntu-version)
+	- [Which Version?](#which-version)
 	- [Dual vs. Single Boot](#dual-vs-single-boot)
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
@@ -24,25 +24,21 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 
 # Installation
 
-## Which Ubuntu Version?
+## Which Version?
 
-The Intel WiFi AX210-module is only natively supported from kernel 5.10. Since the last LTS version 22.04 was on an older kernel and I wanted to save the trouble from hassling with it, the easiest way was to install Ubuntu 21.04 (which was on kernel 5.11). As pointed out in the issues, version 20.04 ships now with a newer kernel and should work fine.
-
-Later, I switched to 21.10 and in the beginning a couple of applications didn't work for me, as they weren't supported. But everything got resolved very quickly. More things work out of the box and installation was way easier than before.
-
-I downloaded the new LTS version 22.04 directly on day 1 and will update this guide when something comes up. So far everything works perfectly.
+The Intel WiFi AX210-module is only natively supported from kernel 5.10. Initially it was the easiest to just install the latest version, but as pointed out in the issues older versions (at least 20.04 LTS) also ship with that or a newer kernel version.
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
 ## Dual vs. Single Boot
 
-**Important:** _If you want to use Ubuntu as the only OS but still keep the original recovery partition containing Windows (partition 0) **DO NOT** remove the other partitions. The recovery tool will only install Windows 10 on partition 3 without checking or recreating any partitions. It took me way too long to find this out, but in case that happens to you, you would need to manually create partition 1 (EFI=100MB), partition 2 (MSR=128MB) and a primary partition 3 for the C-Drive, where Windows 10 will be installed._
+**Important:** _If you want to use Ubuntu as the only OS, but still want to keep the original recovery partition containing Windows (partition 0) **DO NOT** remove the other partitions. The recovery tool will only install Windows 10 on partition 3 without checking or recreating any partitions. It took me way too long to find this out, but in case that happens to you, you would need to manually create partition 1 (EFI=100MB), partition 2 (MSR=128MB) and a primary partition 3 for the C-Drive, where Windows 10 will be installed._
 
 If you want to keep the original Razer wallpapers, make sure to copy them before formatting Windows. You can find them located under: _C:\Windows\Web\Wallpaper_
 
-For using Ubuntu alongside Windows you can simply choose "Install Ubuntu alongside Windows Boot Manager" as usual (e.g. like described [here](https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/)).
+For the single boot setup, boot from the USB stick and install it by formatting the biggest partition as ext4, set mount point to "/" and click install.
 
-Boot from the USB stick and boot, try, install, format the biggest partition as ext4, set mount point to "/" and install.
+For using Ubuntu alongside Windows you can simply choose "Install Ubuntu alongside Windows Boot Manager" (e.g. like described [here](https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/)).
 
 # Fixes
 
@@ -54,7 +50,7 @@ After the lid was closed, the notebook goes back to suspend after a couple of se
 
 #### Grub Font Size
 
-Depending on whether you are using a dual or single boot setup, you might want to increase the font size of the grub menu (especially for the 4K display) or to hide it completely.
+Depending on whether you want to show the grub bootloader at startup or not, you might want to increase the font size of the grub menu (especially for the 4K display) or to hide it completely.
 
 As the font of grub can be very tiny on a high res display, you can create a bigger one with the following command, as described [here](https://blog.wxm.be/2014/08/29/increase-font-in-grub-for-high-dpi.html). I chose a font size of 42 for the 4K panel. 
 
@@ -65,6 +61,8 @@ sudo grub-mkfont --output=/boot/grub/fonts/DejaVuSansMono24.pf2 --size=42 /usr/s
 Next, open the grub settings with ```sudo nano /etc/default/grub``` and adjust it for either dual boot or single boot.
 
 #### For Dual Boot
+
+If you want to select the operating system with the UEFI boot manager by pressing F12 at startup, you can use the same settings as for the single boot setup. If you want to use grub I suggest following settings:
  
 ```markdown
 GRUB_DEFAULT=saved  # boot the saved OS
