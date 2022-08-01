@@ -318,6 +318,7 @@ and then install EasyEffects
 
 ```markdown
 flatpak install flathub com.github.wwmm.easyeffects
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
 You need the run following commands as described [here](https://ubuntuhandbook.org/index.php/2022/04/pipewire-replace-pulseaudio-ubuntu-2204/):
