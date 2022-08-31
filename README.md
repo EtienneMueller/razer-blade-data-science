@@ -24,13 +24,13 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 
 # Installation
 
-## Which Version?
+### Which Version?
 
 The Intel WiFi AX210-module is only natively supported from kernel 5.10. Initially it was the easiest to just install the latest version, but as pointed out in the issues older versions (at least 20.04 LTS) also ship with that or a newer kernel version.
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
-## Dual vs. Single Boot
+### Dual vs. Single Boot
 
 **Important:** _If you want to use Ubuntu as the only OS, but still want to keep the original recovery partition containing Windows (partition 0) **DO NOT** remove the other partitions. The recovery tool will only install Windows 10 on partition 3 without checking or recreating any partitions. It took me way too long to find this out, but in case that happens to you, you would need to manually create partition 1 (EFI=100MB), partition 2 (MSR=128MB) and a primary partition 3 for the C-Drive, where Windows 10 will be installed._
 
@@ -42,7 +42,7 @@ For using Ubuntu alongside Windows you can simply choose "Install Ubuntu alongsi
 
 # Fixes
 
-## Suspend Loop Fix 
+### Suspend Loop Fix 
 
 After the lid was closed, the notebook goes back to suspend after a couple of seconds and stays in that loop until a restart. It can be fixed fairly easy by adding ```GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"``` to the grub configuration, as is described in the next section.
 
@@ -109,7 +109,7 @@ and add
 MOZ_USE_XINPUT2=1
 ```
 
-### Brightness
+#### Brightness
 
 The OLED screen doesn't react on brightness changes (because it doesn't have a classic backlight as LCD-panels have). Install [ICC brightness](https://github.com/tartansandal/icc-brightness) to solve the problem. 
 
@@ -119,7 +119,7 @@ sudo apt install liblcms2-dev
 sudo make install
 ```
 
-### Gestures
+#### Gestures
 
 If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find was [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable. For the GUI I used [Touché](https://github.com/JoseExposito/touche). You might also want to check https://ubuntuhandbook.org/index.php/2021/06/multi-touch-gestures-ubuntu-20-04/
 
@@ -128,7 +128,7 @@ If you're coming from a mac, you'll probably miss the gestures on the touchpad. 
 
 Now for the interesting part.
 
-## CUDA and CuDNN
+### CUDA and CuDNN
 
 _To work at least TensorFlow 2.6 is needed. The configurations I tested and worked:_
 - _Ubuntu 21.04: nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta._
@@ -165,7 +165,7 @@ source ~/.bashrc
 Another reboot and everything should work. In one case, after reboot the Nvidia drivers were greyed out in _Software & Updates_ and TensorFlow was using the CPU. Running ```sudo ubuntu-drivers install``` and rebooting solved the problem.
 
 
-## Nvidia On-Demand
+### Nvidia On-Demand
 
 The RTX 3080 supports _Nvidia On-Demand_, so your notebook will mainly use the Intel GPU and use the dedicated one only if needed. Go to _NVIDIA X Server Settings_ and set the _PRIME Profiles_ to _NVIDIA On-Demand_. You can also do this via Terminal with ```prime-select```, for example
 
@@ -214,7 +214,7 @@ WaylandEnable=false
 
 With Nvidia On-Demand my battery life increased under light load from two hours to nearly seven hours.
 
-## Conda and TensorFlow
+### Conda and TensorFlow
 
 I like to use Miniconda for my work. Install as usual (if wished):
 
@@ -281,7 +281,7 @@ sudo apt install carla-simulator
 
 # Nice to Have
 
-## Keyboard Backlight
+### Keyboard Backlight
 
 I added support for the Razer Blade Advanced Early 2021 to [OpenRazer](https://openrazer.github.io/). As my pull request got merged you can install it simply as described [here](https://openrazer.github.io/#ubuntu):
 
@@ -304,7 +304,7 @@ Reboot and you're ready to go!
 
 Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark. I just turned the applet of in startup scripts and that solved the problem.
 
-## Better Sound
+### Better Sound
 
 _PulseEffect got updated and is called EasyEffects now. Installation got a little bit more complicated now._
 
@@ -353,7 +353,7 @@ Terminal=false
 Type=Application
 ```
 
-## Face Unlock
+### Face Unlock
 
 The Blade Advanced features an IR camera for Windows Hello. You can use it for face recognition, so you don't need to type your password after _sudo_ or on the login screen. Install [Howdy](https://github.com/Boltgolt/howdy) with
 
@@ -373,7 +373,7 @@ sudo howdy test
 There seems to be a [problem](https://github.com/boltgolt/howdy/issues/323) at some times, when the IR light doesn't turn on. Apparently, by booting from the bios the problem does not occur anymore.
 
 
-## 4K OLED
+### 4K OLED
 
 I haven't heard so far, whether the OLED screen suffers of burn-in or not. But it doesn't hurt to take a little care. 
 
