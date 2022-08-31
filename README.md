@@ -30,7 +30,7 @@ The Intel WiFi AX210-module is only natively supported from kernel 5.10. Initial
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
-_ _
+&nbsp;
 
 ### Dual vs. Single Boot
 
