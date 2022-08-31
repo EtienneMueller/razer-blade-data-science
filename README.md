@@ -42,11 +42,15 @@ For the single boot setup, boot from the USB stick and install it by formatting 
 
 For using Ubuntu alongside Windows you can simply choose "Install Ubuntu alongside Windows Boot Manager" (e.g. like described [here](https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/)).
 
+&nbsp;
+
 # Fixes
 
 ### Suspend Loop Fix 
 
 After the lid was closed, the notebook goes back to suspend after a couple of seconds and stays in that loop until a restart. It can be fixed fairly easy by adding ```GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"``` to the grub configuration, as is described in the next section.
+
+&nbsp;
 
 ### Grub Settings
 
@@ -93,11 +97,13 @@ First line choses Ubuntu as boot partition. As grub will still run in background
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
 
+&nbsp;
+
 ### Older Ubuntu Versions
 
 Here are the things I had problems with in Ubuntu 21.04, but worked fine with later versions.
 
-### Firefox with Touch
+#### Firefox with Touch
 
 Firefox isn't scrolling with touch. Open the environment file with:
 
@@ -125,6 +131,7 @@ sudo make install
 
 If you're coming from a mac, you'll probably miss the gestures on the touchpad. The best I could find was [Touchegg](https://github.com/JoseExposito/touchegg), but much more customizable. For the GUI I used [Touché](https://github.com/JoseExposito/touche). You might also want to check https://ubuntuhandbook.org/index.php/2021/06/multi-touch-gestures-ubuntu-20-04/
 
+&nbsp;
 
 # Data Science
 
@@ -166,6 +173,7 @@ source ~/.bashrc
 
 Another reboot and everything should work. In one case, after reboot the Nvidia drivers were greyed out in _Software & Updates_ and TensorFlow was using the CPU. Running ```sudo ubuntu-drivers install``` and rebooting solved the problem.
 
+&nbsp;
 
 ### Nvidia On-Demand
 
@@ -216,6 +224,8 @@ WaylandEnable=false
 
 With Nvidia On-Demand my battery life increased under light load from two hours to nearly seven hours.
 
+&nbsp;
+
 ### Conda and TensorFlow
 
 I like to use Miniconda for my work. Install as usual (if wished):
@@ -247,6 +257,8 @@ Cuda 11.2 and later need at least TensorFlow 2.6:
 pip install tensorflow
 ```
 
+&nbsp;
+
 ### Using TensorCores
 
 To use the _TensorCores_ on your GPU edit your Code:
@@ -258,6 +270,8 @@ mixed_precision.set_global_policy('mixed_float16')
 
 I get roughly a 30% speedup. Nice.
 
+&nbsp;
+
 ### Matlab
 
 Matlab doesn't scale automatically for the  4K-panel. In the command window run:
@@ -266,6 +280,8 @@ Matlab doesn't scale automatically for the  4K-panel. In the command window run:
 s = settings;s.matlab.desktop.DisplayScaleFactor
 s.matlab.desktop.DisplayScaleFactor.PersonalValue = 2
 ```
+
+&nbsp;
 
 ### Carla Autonomous Driving Simulator
 
@@ -280,6 +296,8 @@ sudo add-apt-repository "deb [arch=amd64] http://dist.carla.org/carla focal main
 sudo apt update
 sudo apt install carla-simulator
 ```
+
+&nbsp;
 
 # Nice to Have
 
@@ -305,6 +323,8 @@ sudo apt install polychromatic
 Reboot and you're ready to go!
 
 Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark. I just turned the applet of in startup scripts and that solved the problem.
+
+&nbsp;
 
 ### Better Sound
 
@@ -355,6 +375,8 @@ Terminal=false
 Type=Application
 ```
 
+&nbsp;
+
 ### Face Unlock
 
 The Blade Advanced features an IR camera for Windows Hello. You can use it for face recognition, so you don't need to type your password after _sudo_ or on the login screen. Install [Howdy](https://github.com/Boltgolt/howdy) with
@@ -374,6 +396,7 @@ sudo howdy test
 
 There seems to be a [problem](https://github.com/boltgolt/howdy/issues/323) at some times, when the IR light doesn't turn on. Apparently, by booting from the bios the problem does not occur anymore.
 
+&nbsp;
 
 ### 4K OLED
 
@@ -388,6 +411,8 @@ I haven't heard so far, whether the OLED screen suffers of burn-in or not. But i
 - **Hide the Top Bar.** Lastly, to hide the top bar you can install the gnome extension [Hide Top Bar](https://extensions.gnome.org/extension/545/hide-top-bar/). Activate it and set the two Intellihide options off.
 
 - **Hide Home and Trash Icon.** When gnome extension is installed, you can also remove the icons from the desktop. Just right-click in the desktop, choose settings and turn off the toggles for personal folder and trash.
+
+&nbsp;
 
 ### Bluetooth for Airpods
 
