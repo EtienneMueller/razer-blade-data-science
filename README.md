@@ -30,6 +30,8 @@ The Intel WiFi AX210-module is only natively supported from kernel 5.10. Initial
 
 [Create a bootable USB-Stick](https://ubuntu.com/tutorials?q=%22create+a+bootable+usb+stick%22) with Ubuntu
 
+* *
+
 ### Dual vs. Single Boot
 
 **Important:** _If you want to use Ubuntu as the only OS, but still want to keep the original recovery partition containing Windows (partition 0) **DO NOT** remove the other partitions. The recovery tool will only install Windows 10 on partition 3 without checking or recreating any partitions. It took me way too long to find this out, but in case that happens to you, you would need to manually create partition 1 (EFI=100MB), partition 2 (MSR=128MB) and a primary partition 3 for the C-Drive, where Windows 10 will be installed._
@@ -46,7 +48,7 @@ For using Ubuntu alongside Windows you can simply choose "Install Ubuntu alongsi
 
 After the lid was closed, the notebook goes back to suspend after a couple of seconds and stays in that loop until a restart. It can be fixed fairly easy by adding ```GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"``` to the grub configuration, as is described in the next section.
 
-## Grub Settings
+### Grub Settings
 
 #### Grub Font Size
 
@@ -91,7 +93,7 @@ First line choses Ubuntu as boot partition. As grub will still run in background
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
 
-## Older Ubuntu Versions
+### Older Ubuntu Versions
 
 Here are the things I had problems with in Ubuntu 21.04, but worked fine with later versions.
 
@@ -245,7 +247,7 @@ Cuda 11.2 and later need at least TensorFlow 2.6:
 pip install tensorflow
 ```
 
-## Using TensorCores
+### Using TensorCores
 
 To use the _TensorCores_ on your GPU edit your Code:
 
@@ -256,7 +258,7 @@ mixed_precision.set_global_policy('mixed_float16')
 
 I get roughly a 30% speedup. Nice.
 
-## Matlab
+### Matlab
 
 Matlab doesn't scale automatically for the  4K-panel. In the command window run:
 
@@ -265,7 +267,7 @@ s = settings;s.matlab.desktop.DisplayScaleFactor
 s.matlab.desktop.DisplayScaleFactor.PersonalValue = 2
 ```
 
-## Carla Autonomous Driving Simulator
+### Carla Autonomous Driving Simulator
 
 [Carla](https://carla.readthedocs.io/en/0.9.11/start_quickstart/) is the only application so far that made minor troubles while installing under Ubuntu 21.04. 
 
@@ -387,6 +389,6 @@ I haven't heard so far, whether the OLED screen suffers of burn-in or not. But i
 
 - **Hide Home and Trash Icon.** When gnome extension is installed, you can also remove the icons from the desktop. Just right-click in the desktop, choose settings and turn off the toggles for personal folder and trash.
 
-## Bluetooth for Airpods
+### Bluetooth for Airpods
 
 With Ubuntu 21.04 it didn't really work to connect Airpods to the notebook. A fix can be found [here](https://askubuntu.com/questions/922860/pairing-apple-airpods-as-headset).
