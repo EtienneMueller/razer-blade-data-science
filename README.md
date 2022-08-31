@@ -8,7 +8,6 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
 	- [Grub Settings](#grub-settings)
-	- [Keyboard Backlight](#keyboard-backlight)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
 - [Data Science](#data-science)
 	- [CUDA and CuDNN](#cuda-and-cudnn)
@@ -17,6 +16,7 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 	- [Using TensorCores](#using-tensorcores)
 	- [Carla Autonomous Driving Simulator](#carla-autonomous-driving-simulator)
 - [Nice to Have](#nice-to-have)
+	- [Keyboard Backlight](#keyboard-backlight)
 	- [Better Sound](#better-sound)
 	- [Face Unlock](#face-unlock)
 	- [4K OLED](#4k-oled)
@@ -90,29 +90,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"  # suspend 
 First line choses Ubuntu as boot partition. As grub will still run in background, the timeout is set to one second (setting it to zero it will be ignored and then it takes the standard time of ten seconds). The third line hides the display output, and the last line fixes the suspend loop.
 
 Update grub with ```sudo update-grub``` and reboot your system  ```sudo reboot```.
-
-## Keyboard Backlight
-
-I added support for the Razer Blade Advanced Early 2021 to [OpenRazer](https://openrazer.github.io/). As my pull request got merged you can install it simply as described [here](https://openrazer.github.io/#ubuntu):
-
-```markdown
-sudo add-apt-repository ppa:openrazer/stable
-sudo apt update
-sudo apt install openrazer-meta
-```
-
-Don't forget to add your user to the plugdev group with ```sudo gpasswd -a $USER plugdev```.
-
-For the GUI I use [Polychromatic](https://github.com/polychromatic/polychromatic/). Install with:
-
-```markdown
-sudo add-apt-repository ppa:polychromatic/stable
-sudo apt install polychromatic
-```
-
-Reboot and you're ready to go!
-
-Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark. I just turned the applet of in startup scripts and that solved the problem.
 
 ## Older Ubuntu Versions
 
@@ -303,6 +280,29 @@ sudo apt install carla-simulator
 ```
 
 # Nice to Have
+
+## Keyboard Backlight
+
+I added support for the Razer Blade Advanced Early 2021 to [OpenRazer](https://openrazer.github.io/). As my pull request got merged you can install it simply as described [here](https://openrazer.github.io/#ubuntu):
+
+```markdown
+sudo add-apt-repository ppa:openrazer/stable
+sudo apt update
+sudo apt install openrazer-meta
+```
+
+Don't forget to add your user to the plugdev group with ```sudo gpasswd -a $USER plugdev```.
+
+For the GUI I use [Polychromatic](https://github.com/polychromatic/polychromatic/). Install with:
+
+```markdown
+sudo add-apt-repository ppa:polychromatic/stable
+sudo apt install polychromatic
+```
+
+Reboot and you're ready to go!
+
+Weirdly, when the tray applet is running and I put the laptop to sleep and wake again, the backlight is turned off until after login. Not sure if it is a bug, but it makes it difficult logging in in the dark. I just turned the applet of in startup scripts and that solved the problem.
 
 ## Better Sound
 
