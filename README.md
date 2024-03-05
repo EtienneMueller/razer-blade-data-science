@@ -7,6 +7,7 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 	- [Dual vs. Single Boot](#dual-vs-single-boot)
 - [Fixes](#fixes)
 	- [Suspend Loop Fix](#suspend-loop-fix)
+	- [Trackpad Fix](#trackpad-fix)
 	- [Grub Settings](#grub-settings)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
 - [Data Science](#data-science)
@@ -52,6 +53,58 @@ After the lid was closed, the notebook goes back to suspend after a couple of se
 
 &nbsp;
 
+### Trackpad Fix
+
+When the laptop has been put in sleep by suspending it or closing the lid, the trackpad was turning  into weird issues making it unusable without a reboot, this can now be fix with [this workaround](https://askubuntu.com/questions/1418408/razer-blade-15-errors-on-new-ubuntu-22-installation-acpi-bios-error-bug-trac/1418598#1418598) :
+
+Create a new file: `/etc/systemd/system/acpi-wake-andy.service`
+
+```
+[Unit]
+Description=ACPI Wake Service
+ 
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "echo RP05 | sudo tee /proc/acpi/wakeup"
+ 
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable this serviece
+
+```
+sudo systemctl start acpi-wake-andy.service
+sudo systemctl enable acpi-wake-andy.service
+sudo systemctl status acpi-wake-andy.service # check status
+```
+
+Create a new file: `/etc/modprobe.d/nvidia-s2idle.conf`
+
+```
+options nvidia NVreg_EnableS0ixPowerManagement=1
+NVreg_S0ixPowerManagementVideoMemoryThreshold=10000
+```
+
+Check status `cat /sys/power/mem_sleep` output
+
+```
+[s2idle] deep // You can test the trackpad after suspend and stop here
+s2idle [deep] // You need to change something in the grub configuration
+```
+
+Only if the above command output is on : `s2idle [deep]`) you need to edit : `/etc/default/grub`
+
+Add mem_sleep_default=s2idle to GRUB_CMDLINE_LINUX_DEFAULT :
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash mem_sleep_default=s2idle" 
+```
+
+Run `sudo update-grub` and then reboot, the trackpad should work normally after a suspend.
+
+
+
 ### Grub Settings
 
 #### Grub Font Size
@@ -69,7 +122,7 @@ Next, open the grub settings with ```sudo nano /etc/default/grub``` and adjust i
 #### For Dual Boot
 
 If you want to select the operating system with the UEFI boot manager by pressing F12 at startup, you can use the same settings as for the single boot setup. If you want to use grub I suggest following settings:
- 
+
 ```markdown
 GRUB_DEFAULT=saved  # boot the saved OS
 GRUB_SAVEDEFAULT=true  # save the last booted OS
