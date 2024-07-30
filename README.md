@@ -1,6 +1,6 @@
-# Razer Blade 15 (2021) for Data Science
+# Razer Blade 15 for Data Science
 
-Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with Ubuntu.
+Here is how i set up my LambdaLabs TensorBook/Razer Blade 15 (2022, RTX 3070 Ti) to work with Ubuntu 24.04.
 
 - [Installation](#installation)
 	- [Which Version?](#which-version)
@@ -11,10 +11,14 @@ Here is how i set up my Razer Blade 15 (Early 2021, RTX 3080, 4k) to work with U
 	- [Grub Settings](#grub-settings)
 	- [Older Ubuntu Versions](#older-ubuntu-versions)
 - [Data Science](#data-science)
-	- [CUDA and CuDNN](#cuda-and-cudnn)
+	- [Miniforge](#miniforge)	
+	- [CUDA](#cuda)
+ 	- [TensorFlow](#tensorflow)
+  	- [Using TensorCores](#using-tensorcores)
+  	- [Nvidia CuDNN (optional)](#nvidia-cudnn-(optional))
+  	- [GPU only for Processing (X11 only)](#gpu-only-for-processing-(x11-only))
 	- [Nvidia On-Demand](#nvidia-on-demand)
-	- [Conda and TensorFlow](#conda-and-tensorflow)
-	- [Using TensorCores](#using-tensorcores)
+	- [Matlab 4k](#matlab-4k)
 	- [Carla Autonomous Driving Simulator](#carla-autonomous-driving-simulator)
 - [Nice to Have](#nice-to-have)
 	- [Keyboard Backlight](#keyboard-backlight)
@@ -190,16 +194,34 @@ If you're coming from a mac, you'll probably miss the gestures on the touchpad. 
 
 Now for the interesting part.
 
-### CUDA and CuDNN
+### Miniforge
 
-_To work at least TensorFlow 2.6 is needed. The configurations I tested and worked:_
-- _Ubuntu 21.04: nvidia-driver-460 with CUDA 11.2 and TensorFlow 2.6 beta._
-- _Ubuntu 21.10: nvidia-driver-470 with CUDA 11.4 and TensorFlow 2.6._
-- _Ubuntu 22.04: nvidia-driver-510 and 515 with CUDA 11.6 and 11.7 and TensorFlow 2.8 and 2.9._
+I like to use Miniforge for my work. To download, install and create an environment called `tf` run:
 
-_Basically staying for the driver, CUDA and TensorFlow on the latest version worked fine for me. Installation procedures were the same for all versions._
+```
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+bash Miniforge3-Linux-x86_64.sh
+source ~/.bashrc
 
-Activate Nvidia Proprietary Driver in "Software & Updates" under "Additional Drivers" (nvidia-driver-515 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (11.7 for me) with:
+conda create --name tf python=3.12
+conda activate tf
+pip install --upgrade pip
+```
+
+If you want to deactivate and remove the environment simply run:
+
+```markdown
+conda deactivate
+conda env remove -n tf
+```
+
+&nbsp;
+
+### CUDA
+
+Setting up CUDA and TensorFlow has become easier lately. If you want to set up older versions of Ubuntu/CUDA/CuDNN have a look at an older [coomit](https://github.com/EtienneMueller/razer-blade-data-science/tree/d015c5186a69fb9769b83d0577b73a92a3553d44) of this post.
+
+If you didn't choose the additional drivers during the installation of Ubuntu, activate the Nvidia Proprietary Driver in *Software & Updates* under *Additional Drivers* (nvidia-driver-535 at the time of writing) and reboot. You can display information about the GPU and the CUDA Version (12.2 for me) with:
 
 ```markdown
 nvidia-smi
@@ -211,7 +233,34 @@ Install the Nvidia Cuda Toolkit next:
 sudo apt install nvidia-cuda-toolkit
 ```
 
-Download [Nvidia CuDNN](https://developer.nvidia.com/cudnn), extract the tarball and copy the files to the corresponding path:
+&nbsp;
+
+### TensorFlow
+
+To install the latest version of TensorFlow with GPU support simply run:
+
+```markdown
+pip install tensorflow[and-gpu]
+```
+
+&nbsp;
+
+### Using TensorCores
+
+To use the _TensorCores_ on your GPU edit your Code:
+
+```markdown
+from tensorflow.keras import mixed_precision
+mixed_precision.set_global_policy('mixed_float16')
+```
+
+I get roughly a 30% speedup. Nice.
+
+&nbsp;
+
+### Nvidia CuDNN (optional)
+
+Installing [Nvidia CuDNN](https://developer.nvidia.com/cudnn) isn't necessary anymore when installing TensorFlow as described previously. If you still want to install it for other reasons: this is the way it worked for me:
 
 ```markdown
 tar -xf cudnn-linux-x86_64-*.tar.xz
@@ -224,7 +273,26 @@ echo 'export LD_LIBRARY_PATH=/usr/lib/cuda/include:$LD_LIBRARY_PATH' >> ~/.bashr
 source ~/.bashrc
 ```
 
-Another reboot and everything should work. In one case, after reboot the Nvidia drivers were greyed out in _Software & Updates_ and TensorFlow was using the CPU. Running ```sudo ubuntu-drivers install``` and rebooting solved the problem.
+Reboot and everything should work. In some cases, after reboot the Nvidia drivers were greyed out in _Software & Updates_ and TensorFlow was using the CPU. Running ```sudo ubuntu-drivers install``` and rebooting solved the problem.
+
+&nbsp;
+
+### GPU only for Processing (X11 only)
+
+When you use X11 instead of Wayland and run  `nvidia-smi` you should see one process called `/usr/lib/xorg/Xorg`. This is the display protocol that is being processed by the discrete GPU. If you want to ran that on the low-powered iGPU (Intel) and use the dGPU just for processing, do the following (updated from [here](https://andresbecker.github.io/linux/nvidia/gpu/tf/2021/07/23/Install-NVIDIA-GPU-drivers-on-Ubuntu-20-04-only-for-processing.html)):
+
+Open the Nvidia config file e.g. with `sudo nano /etc/modprobe.d/nvidia-graphics-drivers-kms.conf` and add the following lines to the end:
+
+```
+blacklist nvidia_drm
+blacklist nvidia_modeset
+install nvidia_drm /bin/false
+install nvidia_modeset /bin/false
+```
+
+After rebooting try using `nvidia-smi`. There should not be any *Xorg* processes listed anymore
+
+I you found a way to do the same for Wayland let me know!
 
 &nbsp;
 
@@ -279,55 +347,9 @@ With Nvidia On-Demand my battery life increased under light load from two hours 
 
 &nbsp;
 
-### Conda and TensorFlow
+### Matlab 4k
 
-I like to use Miniconda for my work. Install as usual (if wished):
-
-```markdown
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-source ~/.bashrc
-```
-
-Create and activate environment:
-
-```markdown
-conda create --name ENV python
-conda activate ENV
-pip install --upgrade pip
-```
-
-If you need to deactivate and remove environments you can do it with:
-
-```markdown
-conda deactivate
-conda env remove -n ENV
-```
-
-Cuda 11.2 and later need at least TensorFlow 2.6:
-
-```markdown
-pip install tensorflow
-```
-
-&nbsp;
-
-### Using TensorCores
-
-To use the _TensorCores_ on your GPU edit your Code:
-
-```markdown
-from tensorflow.keras import mixed_precision
-mixed_precision.set_global_policy('mixed_float16')
-```
-
-I get roughly a 30% speedup. Nice.
-
-&nbsp;
-
-### Matlab
-
-Matlab doesn't scale automatically for the  4K-panel. In the command window run:
+Matlab doesn't scale automatically for 4K-panels. In the command window run:
 
 ```markdown
 s = settings;s.matlab.desktop.DisplayScaleFactor
